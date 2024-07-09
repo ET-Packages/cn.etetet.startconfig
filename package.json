@@ -1,7 +1,7 @@
 {
   "name": "cn.etetet.startconfig",
   "displayName": "ET.StartConfig",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "unity": "2022.3",
   "description": "et startconfig",
   "author": {
@@ -13,8 +13,10 @@
     "url": "https://github.com/egametang/ET"
   },
   "relatedPackages": {},
-  "publishConfig": 
-  { 
-    "registry": "https://npm.pkg.github.com/@ET-Packages" 
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/@ET-Packages"
+  },
+  "dependencies": {
+    "cn.etetet.proto": "0.0.4"
   }
 }

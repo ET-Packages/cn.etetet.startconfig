@@ -8,9 +8,11 @@ namespace ET
     {
         private readonly MultiMap<int, StartSceneConfig> processScenes = new();
 
-        private readonly Dictionary<long, Dictionary<string, StartSceneConfig>> scenesByName = new();
+        private readonly Dictionary<long, Dictionary<string, StartSceneConfig>> zoneScenesByName = new();
 
-        private readonly Dictionary<long, MultiMap<int, StartSceneConfig>> sceneByType = new();
+        private readonly Dictionary<long, MultiMap<int, StartSceneConfig>> zoneSceneByType = new();
+        
+        private readonly MultiMap<int, StartSceneConfig> sceneByType = new();
         
         public List<StartSceneConfig> GetByProcess(int process)
         {
@@ -19,36 +21,43 @@ namespace ET
         
         public StartSceneConfig GetBySceneName(int zone, string name)
         {
-            return this.scenesByName[zone][name];
+            return this.zoneScenesByName[zone][name];
         }
         
         public List<StartSceneConfig> GetBySceneType(int zone, int type)
         {
-            return this.sceneByType[zone][type];
+            return this.zoneSceneByType[zone][type];
+        }
+        
+        public List<StartSceneConfig> GetBySceneType(int type)
+        {
+            return this.sceneByType[type];
         }
         
         public StartSceneConfig GetOneBySceneType(int zone, int type)
         {
-            return this.sceneByType[zone][type][0];
+            return this.zoneSceneByType[zone][type][0];
         }
 
         public override void EndInit()
         {
             foreach (StartSceneConfig startSceneConfig in this.GetAll().Values)
             {
+                sceneByType.Add(startSceneConfig.Type, startSceneConfig);
+                
                 this.processScenes.Add(startSceneConfig.Process, startSceneConfig);
                 
-                if (!this.scenesByName.ContainsKey(startSceneConfig.Zone))
+                if (!this.zoneScenesByName.ContainsKey(startSceneConfig.Zone))
                 {
-                    this.scenesByName.Add(startSceneConfig.Zone, new Dictionary<string, StartSceneConfig>());
+                    this.zoneScenesByName.Add(startSceneConfig.Zone, new Dictionary<string, StartSceneConfig>());
                 }
-                this.scenesByName[startSceneConfig.Zone].Add(startSceneConfig.Name, startSceneConfig);
+                this.zoneScenesByName[startSceneConfig.Zone].Add(startSceneConfig.Name, startSceneConfig);
                 
-                if (!this.sceneByType.ContainsKey(startSceneConfig.Zone))
+                if (!this.zoneSceneByType.ContainsKey(startSceneConfig.Zone))
                 {
-                    this.sceneByType.Add(startSceneConfig.Zone, new MultiMap<int, StartSceneConfig>());
+                    this.zoneSceneByType.Add(startSceneConfig.Zone, new MultiMap<int, StartSceneConfig>());
                 }
-                this.sceneByType[startSceneConfig.Zone].Add(startSceneConfig.Type, startSceneConfig);
+                this.zoneSceneByType[startSceneConfig.Zone].Add(startSceneConfig.Type, startSceneConfig);
             }
         }
     }

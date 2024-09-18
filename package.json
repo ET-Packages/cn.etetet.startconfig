@@ -1,7 +1,7 @@
 ﻿{
   "name": "cn.etetet.startconfig",
   "displayName": "ET.StartConfig",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "unity": "2022.3",
   "description": "服务器起服配置",
   "author": {

@@ -1,7 +1,7 @@
-﻿{
+{
   "name": "cn.etetet.startconfig",
   "displayName": "ET.StartConfig",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "unity": "2022.3",
   "description": "服务器起服配置",
   "author": {
@@ -15,8 +15,5 @@
   "relatedPackages": {},
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/@ET-Packages"
-  },
-  "dependencies": {
-    "cn.etetet.excel": "2.0.0"
   }
 }
